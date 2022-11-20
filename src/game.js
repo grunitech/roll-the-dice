@@ -5,15 +5,14 @@ let state = {
     page: 'welcome',
     players: [{}, {}],
     rounds: 3,
+    mode: 'points',
     currentPlayer: 0,
 };
-
 
 // view functions
 
 const hideMains = () => document.querySelectorAll('main').forEach(e => e.style.display = 'none');
 const showCurrentPage = (s) => document.getElementById(s.page).style.display = 'block';
-
 
 const displayPlayers = (s) => {
     console.log('display players');
@@ -36,7 +35,6 @@ const displayPlayers = (s) => {
     }
 };
 
-
 function render(s /*State*/) {
     hideMains();
     showCurrentPage(s);
@@ -49,9 +47,11 @@ function render(s /*State*/) {
     }
 }
 
+
+
 // actions (data)
 
-function startNewGame(s) {
+function enterPlayers(s) {
     state = {...s, page: 'players'};
 }
 
@@ -65,15 +65,12 @@ function letsPlay(s) {
 // attach events
 
 // start button
-const start = document.getElementById('start');
-start.addEventListener('click', () => {
-    startNewGame(state);
+document.getElementById('start').addEventListener('click', () => {
+    enterPlayers(state);
     render(state);
 });
 
-const letStart = document.getElementById('let-start');
-letStart.addEventListener('click', () => {
-    // do something
+document.getElementById('let-start').addEventListener('click', () => {
     letsPlay(state);
     render(state);
 });
